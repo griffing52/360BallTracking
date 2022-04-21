@@ -6,7 +6,7 @@ import time
 import cv2
 
 class Camera:
-    def __init__(self,  id=0, name="default", offsetX=0, offsetY=0, angle=0, exposure=0):
+    def __init__(self,  id=0, name="default", offsetX=0, offsetY=0, angle=0, exposure=0, captureapi=0):
         """
         The function __init__ is a constructor that initializes the class variables name, id, capture,
         
@@ -18,8 +18,10 @@ class Camera:
         :param exposure: the exposure of the camera
         """
         self.name = name
+        print(f"{self.name} camera loading...")
         self.id = id
         self.exposure = exposure
+        self.capture_api = captureapi
         self.configure_capture()
         self.x = offsetX
         self.y = offsetY
@@ -27,10 +29,11 @@ class Camera:
         self.is_saving_video = False
         self.update_func = lambda: True
         self.key_callbacks = []
+        print(f"{self.name} camera loaded")
 
     def configure_capture(self):
-        self.capture = cv2.VideoCapture(self.id)
-        self.capture.set(cv2.CAP_PROP_EXPOSURE,self.exposure)
+        self.capture = cv2.VideoCapture(self.id, self.capture_api)
+        # self.capture.set(cv2.CAP_PROP_EXPOSURE,self.exposure)
         if (not(self.capture.isOpened())):
 	        print("Error reading video file")
         self.width = int(self.capture.get(3))
@@ -86,13 +89,16 @@ class Camera:
             ret, frame = self.capture.read()
 
             self.frame = np.array(frame)
-            self.pipeline.run(self.frame, self.name)
-            # try:
-            # except:
-            #     self.configure_capture()
 
             if self.is_saving_video and self.video_writer:
                 self.video_writer.write(self.frame)
+                
+            try:
+                self.pipeline.run(self.frame, self.name)
+            except Exception as e: print(e)
+            # except:
+            #     self.configure_capture()
+
 
             self.update_func()
 

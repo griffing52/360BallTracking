@@ -2,12 +2,13 @@ class CameraGroup:
     # TODO multiple arguments? args...
     def __init__(self, *cameras):
         self.cameras = []
-        self.add_camera(cameras)
+        for camera in cameras:
+            self.cameras.append(camera)
         return
     
     def add_camera(self, *cameras):
         for camera in cameras:
-            self.cameras.append(amera)
+            self.cameras.append(camera)
 
     def add_pipeline(self, pipeline):
         for camera in self.cameras:
