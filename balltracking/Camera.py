@@ -95,15 +95,15 @@ class Camera:
                 
             try:
                 self.pipeline.run(self.frame, self.name)
-            except Exception as e: print(e)
-            # except:
-            #     self.configure_capture()
+            except Exception as e: 
+                print(e)
+                self.configure_capture()
 
 
             self.update_func()
 
             # TODO check if is number instead
-            # if str(self.id) == self.id:
+            # if isinstance(self.id, str):
             #     time.sleep(0.08)
 
             key = cv2.waitKey(1)
@@ -112,5 +112,4 @@ class Camera:
             for pair in self.key_callbacks:
                 if (key == pair[0]):
                     pair[1](self)
-        
         # cv2.destroyAllWindows() #TODO ?

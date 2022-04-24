@@ -17,7 +17,7 @@ def connectionListener(connected, info):
         notified[0] = True
         cond.notify()
 
-NetworkTables.initialize(server='localhost') # localhost for simulation, 10.TE.AM.2 format for real robot
+NetworkTables.initialize(server=HOST) # localhost for simulation, 10.TE.AM.2 format for real robot
 NetworkTables.addConnectionListener(connectionListener, immediateNotify=True)
 
 with cond:
