@@ -22,6 +22,10 @@ class CameraGroup:
         for camera in self.cameras:
             camera.add_key_callback(key, callback)
 
+    def save_camera_settings(self):
+        for camera in self.cameras:
+            camera.save_camera_settings()
+
     def get_object_poses(self):
         return [camera.get_object_poses() for camera in self.cameras]
 

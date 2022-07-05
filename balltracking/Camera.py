@@ -5,6 +5,9 @@ import time
 # import sys
 import cv2
 
+def version():
+    print("1.0.0 Galimi")
+
 class Camera:
     def __init__(self,  id=0, name="default", offsetX=0, offsetY=0, angle=0, exposure=0, captureapi=0):
         """
@@ -33,9 +36,11 @@ class Camera:
 
     def configure_capture(self):
         self.capture = cv2.VideoCapture(self.id, self.capture_api)
-        # self.capture.set(cv2.CAP_PROP_EXPOSURE,self.exposure)
+        self.capture.set(cv2.CAP_PROP_EXPOSURE,self.exposure)
+        self.capture.set(cv2.CAP_PROP_AUTO_EXPOSURE,-1)
         if (not(self.capture.isOpened())):
 	        print("Error reading video file")
+        # self.capture.set(cv2.CV_E, 0)
         self.width = int(self.capture.get(3))
         self.height = int(self.capture.get(4))
 
@@ -66,7 +71,7 @@ class Camera:
     def add_key_callback(self, key, callback):
         self.key_callbacks.append((key, callback))
 
-    def get_object_poses(self):
+    def get_object_poses(self):  
         # TODO calculate
         poses = []
         positions = self.pipeline.get_distances_and_angle_from_camera()
@@ -113,3 +118,13 @@ class Camera:
                 if (key == pair[0]):
                     pair[1](self)
         # cv2.destroyAllWindows() #TODO ?
+
+    def save_camera_settings(self):
+        with open(f"{self.name}_camera.config", "w+") as f:
+            string = ""
+            string += f"auto_exposure: {self.capture.get(cv2.CAP_PROP_AUTO_EXPOSURE)}\n"
+            string += f"auto_wb: {self.capture.get(cv2.CAP_PROP_AUTO_WB)}\n"
+            string += f"brightness: {self.capture.get(cv2.CAP_PROP_BRIGHTNESS)}\n"
+            string += f"saturation: {self.capture.get(cv2.CAP_PROP_SATURATION)}\n"
+            string += f"fps: {self.capture.get(cv2.CAP_PROP_FPS)}\n"
+            f.write(string)

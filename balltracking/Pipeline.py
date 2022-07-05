@@ -18,10 +18,10 @@ class BallDetection(Pipeline):
         Pipeline.__init__(self)
         # test widths (pixels)
         self.positions = [(50, 0), (100, 10), (20, -6)]
-        # self.lower_threshold = np.array([173, 114, 153]) # home red bouncy ball
-        # self.upper_threshold = np.array([179, 255, 255])
-        self.lower_threshold = np.array([100, 159,  74]) # blue ball
-        self.upper_threshold = np.array([106, 218, 174])
+        self.lower_threshold = np.array([  1, 120,  100]) # home red bouncy ball
+        self.upper_threshold = np.array([  4, 222, 255])
+        # self.lower_threshold = np.array([100, 159,  74]) # blue ball
+        # self.upper_threshold = np.array([106, 218, 174])
     
     def get_distances_and_angle_from_camera():
         return self.positions

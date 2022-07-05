@@ -1,7 +1,6 @@
 import threading
 from networktables import NetworkTables, NetworkTablesInstance
 
-
 # manages NetworkTables Connection
 class NTConnection:
     # HOST = "127.0.0.1" or "localhost" for localhost

@@ -6,6 +6,7 @@ import socket
 from networktables import NetworkTables, NetworkTablesInstance
 
 HOST = "127.0.0.1"
+# HOST = "127.0.0.1"
 PORT = 65432
 
 cond = threading.Condition()
