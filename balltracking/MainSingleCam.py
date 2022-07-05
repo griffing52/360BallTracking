@@ -1,6 +1,7 @@
 from Pipeline import *
 from Camera import Camera
 from CameraGroup import CameraGroup
+import Graphics
 
 pipeline = BallDetection()
 
@@ -8,14 +9,11 @@ pipeline = BallDetection()
 # hubcam = Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "hub")
 # hubcam2 = Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "hub2")
 frontcam = Camera(0, "front", exposure=-3)
-# backcam = Camera(1, "back", exposure=-7)
-# sidecam = Camera(2, "side", exposure=-7)
 # frontcam = Camera(0, "front", captureapi=cv2.CAP_DSHOW)
-# backcam = Camera(1, "back", captureapi=cv2.CAP_DSHOW)
-# sidecam = Camera(2, "side", captureapi=cv2.CAP_DSHOW)
+
+frontcam.add_graphics(Graphcis())
 
 camGroup = CameraGroup(frontcam)
-# camGroup = CameraGroup(frontcam, backcam, sidecam)
 
 print("Adding pipelines")
 camGroup.add_pipeline(pipeline)

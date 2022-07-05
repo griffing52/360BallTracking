@@ -32,6 +32,7 @@ class Camera:
         self.is_saving_video = False
         self.update_func = lambda: True
         self.key_callbacks = []
+        self.graphics = []
         print(f"{self.name} camera loaded")
 
     def configure_capture(self):
@@ -71,6 +72,9 @@ class Camera:
     def add_key_callback(self, key, callback):
         self.key_callbacks.append((key, callback))
 
+    def add_graphics(self, graphic):
+        self.graphics.append(graphic)
+
     def get_object_poses(self):  
         # TODO calculate
         poses = []
@@ -98,6 +102,10 @@ class Camera:
             if self.is_saving_video and self.video_writer:
                 self.video_writer.write(self.frame)
                 
+            if len(self.graphics) > 0:
+                for graphic in self.graphics:
+                    graphic.display(self.name, self.frame)
+
             try:
                 self.pipeline.run(self.frame, self.name)
             except Exception as e: 
