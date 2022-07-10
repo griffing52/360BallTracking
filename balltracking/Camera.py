@@ -41,6 +41,7 @@ class Camera:
         self.capture.set(cv2.CAP_PROP_AUTO_EXPOSURE,-1)
         if (not(self.capture.isOpened())):
 	        print("Error reading video file")
+
         # self.capture.set(cv2.CV_E, 0)
         self.width = int(self.capture.get(3))
         self.height = int(self.capture.get(4))
@@ -104,7 +105,7 @@ class Camera:
                 
             if len(self.graphics) > 0:
                 for graphic in self.graphics:
-                    graphic.display(self.name, self.frame)
+                    graphic.display(self.name, np.copy(self.frame))
 
             try:
                 self.pipeline.run(self.frame, self.name)

@@ -10,8 +10,9 @@ class Graphics:
         self.elements.append(element)
 
     def display(self, name, frame):
-        for elm in elements:
-            frame = elm.draw()
+        self.frame = frame
+        for elm in self.elements:
+            self.frame = elm.draw(self.frame)
 
-        cv2.imshow(name, frame)
+        cv2.imshow(name, self.frame)
         

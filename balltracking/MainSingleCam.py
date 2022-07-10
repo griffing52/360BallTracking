@@ -1,7 +1,8 @@
 from Pipeline import *
 from Camera import Camera
 from CameraGroup import CameraGroup
-import Graphics
+from Graphics import Graphics
+from UI import *
 
 pipeline = BallDetection()
 
@@ -11,7 +12,10 @@ pipeline = BallDetection()
 frontcam = Camera(0, "front", exposure=-3)
 # frontcam = Camera(0, "front", captureapi=cv2.CAP_DSHOW)
 
-frontcam.add_graphics(Graphcis())
+graphic = Graphics("front")
+graphic.add_element(Warning())
+
+frontcam.add_graphics(graphic)
 
 camGroup = CameraGroup(frontcam)
 
