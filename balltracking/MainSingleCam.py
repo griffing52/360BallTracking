@@ -1,17 +1,19 @@
 from Pipeline import *
 from Camera import Camera
 from CameraGroup import CameraGroup
-import Graphics
+from Graphics import Graphics
+from UI import *
 
 pipeline = BallDetection()
 
-# hubcam = Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "hub")
-# hubcam = Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "hub")
-# hubcam2 = Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "hub2")
 frontcam = Camera(0, "front", exposure=-3)
 # frontcam = Camera(0, "front", captureapi=cv2.CAP_DSHOW)
 
-frontcam.add_graphics(Graphcis())
+
+g = Graphics()
+g.add_element(MiniMap(480))
+
+frontcam.add_graphics(g)
 
 camGroup = CameraGroup(frontcam)
 

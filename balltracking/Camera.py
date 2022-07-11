@@ -104,7 +104,7 @@ class Camera:
                 
             if len(self.graphics) > 0:
                 for graphic in self.graphics:
-                    graphic.display(self.name, self.frame)
+                    graphic.display(self.name, np.copy(self.frame))
 
             try:
                 self.pipeline.run(self.frame, self.name)

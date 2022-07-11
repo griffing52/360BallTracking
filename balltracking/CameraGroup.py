@@ -22,6 +22,10 @@ class CameraGroup:
         for camera in self.cameras:
             camera.add_key_callback(key, callback)
 
+    def add_graphics(self, graphic):
+        for camera in self.cameras:
+            camera.add_graphics(graphic)
+
     def save_camera_settings(self):
         for camera in self.cameras:
             camera.save_camera_settings()
