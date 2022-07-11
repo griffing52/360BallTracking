@@ -41,6 +41,7 @@ class Camera:
         self.capture.set(cv2.CAP_PROP_AUTO_EXPOSURE,-1)
         if (not(self.capture.isOpened())):
 	        print("Error reading video file")
+
         # self.capture.set(cv2.CV_E, 0)
         self.width = int(self.capture.get(3))
         self.height = int(self.capture.get(4))
