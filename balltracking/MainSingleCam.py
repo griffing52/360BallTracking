@@ -10,12 +10,11 @@ frontcam = Camera(0, "front", exposure=-3)
 # frontcam = Camera(0, "front", captureapi=cv2.CAP_DSHOW)
 
 
-graphic = Graphics()
 g = Graphics()
 g.add_element(MiniMap(480))
-graphic.add_element(Warning())
-
-frontcam.add_graphics(graphic)
+g.add_element(Warning("Warning Overheating"))
+g.add_element(Warning("Warning Low Battery"))
+frontcam.add_graphics(g)
 
 camGroup = CameraGroup(frontcam)
 

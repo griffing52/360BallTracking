@@ -1,3 +1,5 @@
+import threading
+
 class CameraGroup:
     # TODO multiple arguments? args...
     def __init__(self, *cameras):
@@ -36,3 +38,7 @@ class CameraGroup:
     def start(self):
         for camera in self.cameras:
             camera.start()
+
+    def start_threaded(self):
+        for camera in self.cameras:
+            threading.Thread(target=camera.start).start()
