@@ -13,5 +13,5 @@ class Graphics:
         for elm in self.elements:
             self.frame = elm.draw(self.frame)
 
-        cv2.imshow(name, self.frame)
+        cv2.imshow("Graphics " + name, self.frame)
         

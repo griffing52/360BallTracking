@@ -42,6 +42,8 @@ class Camera:
         if (not(self.capture.isOpened())):
 	        print("Error reading video file")
 
+        # print("API> "+self.capture.getBackendName())
+
         # self.capture.set(cv2.CV_E, 0)
         self.width = int(self.capture.get(3))
         self.height = int(self.capture.get(4))
@@ -49,7 +51,7 @@ class Camera:
     def add_pipeline(self, pipeline):
         self.pipeline = pipeline
 
-    def add_update_func(func):
+    def add_update_func(self, func):
         self.update_func = func
 
     def save_video(self, boolean):

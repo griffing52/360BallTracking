@@ -4,16 +4,18 @@ from CameraGroup import CameraGroup
 from Graphics import Graphics
 from UI import *
 
-pipeline = BallDetection()
+# pipeline = BallDetection()
+pipeline = HubDetection()
 
-frontcam = Camera(0, "front", exposure=-3)
+# frontcam = Camera(0, "front", exposure=-3)
+frontcam = Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "front", exposure=-3)
 # frontcam = Camera(0, "front", captureapi=cv2.CAP_DSHOW)
 
 
 g = Graphics()
 g.add_element(MiniMap(480))
 g.add_element(Warning("Warning Overheating"))
-g.add_element(Warning("Warning Low Battery"))
+# g.add_element(Warning("Warning Low Battery"))
 frontcam.add_graphics(g)
 
 camGroup = CameraGroup(frontcam)

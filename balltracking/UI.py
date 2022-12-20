@@ -1,6 +1,26 @@
 import cv2
 import numpy as np
 
+# TODO
+# temperature checks
+# check if turret is calibrated
+# battery checks
+# in range for shooting checks
+
+class BallCount:
+    def __init__(self, img_width, img_height):  
+        self.name = name
+        self.count = 0
+        self.margin = 15
+        self.radius = 30
+        self.center = (img_width - self.margin - self.radius, img_height - self.margin - self.radius)
+
+    
+    def draw(self, frame):
+        cv2.circle(self.frame, self.center, self.radius, (70,70,70), 3)
+        cv2.circle(self.frame, self.center, self.radius, (38,38,38), 3)
+        cv2.circle(self.frame, self.center, int(self.radius*0.08), (38,38,38), -1) 
+
 class MiniMap:
     def __init__(self, img_height):
         self.balls = []
@@ -32,7 +52,7 @@ class Warning:
 
         self.i+=1
 
-        if self.i >+ self.text_frames:
+        if self.i > self.text_frames:
             self.i = -self.no_text_frames
 
         if self.i < 0:
@@ -41,7 +61,6 @@ class Warning:
             return self.frame
 
         font = cv2.FONT_HERSHEY_SIMPLEX
-
 
         # get boundary of this text
         textsize = cv2.getTextSize(self.text, font, 1, 2)[0]
