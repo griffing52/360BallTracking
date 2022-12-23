@@ -1,14 +1,12 @@
-from Pipeline import *
-from Camera import Camera
-from CameraGroup import CameraGroup
-from Graphics import Graphics
+import galimi as gg
+
 from UI import *
 
 # pipeline = BallDetection()
-pipeline = HubDetection()
+pipeline = gg.HubDetection()
 
 # frontcam = Camera(0, "front", exposure=-3)
-frontcam = Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "front", exposure=-3)
+frontcam = gg.Camera("C:/Users/griff/Documents/Programming/Python/OpenCV/filename4.avi", "front", exposure=-3)
 # frontcam = Camera(0, "front", captureapi=cv2.CAP_DSHOW)
 
 
@@ -18,7 +16,7 @@ g.add_element(Warning("Warning Overheating"))
 # g.add_element(Warning("Warning Low Battery"))
 frontcam.add_graphics(g)
 
-camGroup = CameraGroup(frontcam)
+camGroup = gg.CameraGroup(frontcam)
 
 print("Adding pipelines")
 camGroup.add_pipeline(pipeline)
