@@ -1,4 +1,8 @@
-import galimi.Pipeline
+from galimi import Pipeline
+
+import numpy as np
+import imutils
+import cv2
 
 class BallDetection(Pipeline):
     def __init__(self):
@@ -107,21 +111,23 @@ class HubDetection(Pipeline):
                 
                 rv = len(filtered) # gets the amount of contours found
 
+                # gets lower-left-most x- and y-value and upper-right-most x- and y-value for final bounding box
+                fx, fy, bx, by = filtered[0][2], filtered[0][4], filtered[0][3], filtered[0][5]
+
                 if rv > 1:
                     longWidth = filtered[len(filtered)-1][3] - filtered[len(filtered)-1][2]
                     filtered = sorted(filtered, key=lambda c: c[0])
                     for i in range(len(filtered)-1, 0, -1):
                         if (filtered[i][0]-filtered[i-1][0] > longWidth*3):
                             rv+=1
+                        if filtered[i][2] < fx: fx = filtered[i][2]
+                        if filtered[i][4] < fy: fy = filtered[i][4]
+                        if filtered[i][3] > bx: bx = filtered[i][3]
+                        if filtered[i][5] > by: by = filtered[i][5]
 
 
-                # gets lower-left-most x- and y-value and upper-right-most x- and y-value for final bounding box
-                fx, fy, bx, by = filtered[0][2], filtered[0][4], filtered[0][3], filtered[0][5]
-                for f in filtered:
-                    if f[2] < fx: fx = f[2]
-                    if f[4] < fy: fy = f[4]
-                    if f[3] > bx: bx = f[3]
-                    if f[5] > by: by = f[5]
+                # for f in filtered:
+                    
                 rw = bx - fx
                 rx = -0.0937486*(0.5*(bx+fx)-0.5*680) - 4.99446 # x in pixels converted to angle in degrees!
                 # draws bounding rectangle
